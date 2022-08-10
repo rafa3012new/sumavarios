@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Suma de dos numeros</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="sumavarios.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div class="titulo">
+      <h1>Introduzca los numeros a sumar</h1>
+    </div>
+    <div class="formulario">
+      <div id="cabecera">
+        <p id="cant_num">Cantidad de Numeros</p>
+        <input class="botones" id="agregar" type="button" value="+">
+        <input class="botones" id="remover" type="button" value="-">
+      </div>
+      <div id="div_numeros">
+          <label class = "enumeros" for="numero1" id="enumero1">Numero #1:</label>
+          <input class = "numeros" id="numero1" type="text"  name="numero1" value="0"><br><br>
+          <label class = "enumeros" for="numero2" id="enumero2">Numero #2:</label>
+          <input class = "numeros" id="numero2" type="text"  name="numero2" value="0"><br><br>
+       </div>
+       <div id="pie_formulario">       
+        <input class="boton" id="calcular" type="button" value="Calcular">
+        <p id="resultado">Click en el boton "Calcular" para ver el resultado</p>
+       </div>
+    </div>
+</body>
+<script>
+
+  //se declaran las variables
+  let cant_numeros = 0;
+
+  //se declaran las variables que se asocian con los elementos html 
+  //que se desea manipular con un alcance global
+  let botonagregar = document.getElementById("agregar");
+  let botonremover = document.getElementById("remover");
+  let botoncalcular = document.getElementById("calcular");
+  let cantidadnum = document.getElementById("cant_num");
+  let resultado = document.getElementById("resultado");
+
+  function comenzar(){
+    //alert("se inicia la carga");
+    cant_numeros = 2;
+    // //les agrago los eventos que se requieren
+     botonagregar.addEventListener("click",agregar,false);
+     botonremover.addEventListener("click",remover,false);
+     botoncalcular.addEventListener("click",suma,false);
+
+    // alert("funciono");
+    // //seteo los elementos con los atributos deseados
+     botonremover.setAttribute("disabled",true);
+     cantidadnum.innerHTML = "La cantidad de numeros a sumar es : " + cant_numeros;
+  }
+
+
+   function agregar(){
+    //se declara la variable nombre_entrada
+    var nombre_entrada = "";
+
+    cant_numeros+=1;
+
+    nombre_entrada = "numero" + cant_numeros;
+
+    var etiqueta_entrada = document.createElement("Label");
+    var entrada = document.createElement("INPUT");
+    var numeros_div = document.getElementById("div_numeros"); 
+    
+    //Se establecen los parametros de la etiqueta
+    etiqueta_entrada.setAttribute("class", "enumeros");
+    etiqueta_entrada.setAttribute("for", nombre_entrada);
+    etiqueta_entrada.setAttribute("id", "e"+nombre_entrada);
+
+    //Se establecen los parametros del Input
+    entrada.setAttribute("class", "numeros");
+    entrada.setAttribute("id", nombre_entrada);
+    entrada.setAttribute("type", "text");
+    entrada.setAttribute("name", nombre_entrada);
+    entrada.setAttribute("value", "0");
+
+    //se agregan los componentes
+    numeros_div.appendChild(etiqueta_entrada);
+    etiqueta_entrada.innerHTML = "Numero #"+cant_numeros+": ";
+    numeros_div.appendChild(entrada);
+    numeros_div.appendChild(document.createElement("br"));
+    numeros_div.appendChild(document.createElement("br"));
+
+    //se actualiza la etiqueta que indica la cantidad de numeros a sumar
+    cantidadnum.innerHTML = "La cantidad de numeros a sumar es : " + cant_numeros;
+
+    //se activa el boton eliminar
+    botonremover.disabled = false;
+
+    resultado.innerHTML = 'Click en el boton "Calcular" para ver el resultado'; 
+  }
+
+    function remover(){
+      if (cant_numeros > 2){
+        //alert("hasta aca se ejecuta agregar");
+        var nombre_entrada = "";
+        var numeros_div = document.getElementById("div_numeros"); 
+      
+        nombre_entrada = "numero" + cant_numeros;
+
+
+        var etiqueta_entrada = document.getElementById("e" + nombre_entrada); 
+        var entrada = document.getElementById(nombre_entrada); 
+
+        //se eliminan los br
+        numeros_div.getElementsByTagName("br")[numeros_div.getElementsByTagName("br").length-3].remove();
+        numeros_div.getElementsByTagName("br")[numeros_div.getElementsByTagName("br").length-2].remove();
+      
+        etiqueta_entrada.remove();
+        entrada.remove();
+
+        cant_numeros-=1;
+        cantidadnum.innerHTML = "La cantidad de numeros a sumar es : " + cant_numeros;
+
+        //alert("el valor de cant_numeros es : " + cant_numeros);
+
+        if (cant_numeros == 2) {
+           botonremover.disabled = true;
+        }
+        resultado.innerHTML = 'Click en el boton "Calcular" para ver el resultado'; 
+      }
+    }
+  
+
+   function suma(){
+     var suma = 0;
+     //obtener el arreglo de todos los input 
+     //que tienen las clase numeros
+     var lista_numeros = document.getElementsByClassName("numeros");
+     for(var i = 0; i <= lista_numeros.length-1; i++){
+      suma+= Number(lista_numeros[i].value); 
+     }
+    // alert(suma);
+    resultado.innerHTML = "La suma de los numeros es : " + suma;    
+   }
+
+
+  //Esto ejecutara la funcion comenzar al argar la pagina
+  window.addEventListener("load",comenzar,false);
+</script>
+</html> 

@@ -1,0 +1,46 @@
+.titulo h1{
+    padding: 1px;
+    /* background-color: darkgray; */
+    font-size: 1.5em;
+    text-align: center;
+}
+
+
+.formulario{
+    margin: 0 auto;
+    border: 1px solid black;
+    border-radius: 3%;
+    text-align: center;
+    width: 400px;
+    height: 450px;
+    line-height: 5px;
+}
+
+#cabecera{
+    line-height: 10px;
+}
+
+#div_numeros{
+    margin-top: 6%;
+    padding: 1%;
+    height: 60%;
+    overflow:auto;
+}
+
+
+
+#pie_formulario{
+    margin: 7% auto 0 auto;
+    text-align: center;
+}
+
+
+.botones {
+    width: 70px;
+    margin: 0 3%;
+}
+
+.boton {
+    margin: 0 2px; 
+    width: 110px;
+}
